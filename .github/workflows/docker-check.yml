@@ -1,0 +1,21 @@
+name: Docker Build Check
+
+# 1. いつ動くか？（mainブランチにPushされた時だわん！）
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-test:
+    # 2. どこで動くか？（GitHubが用意してくれる仮想マシンだわん！）
+    runs-on: ubuntu-latest
+
+    steps:
+    # 3. 何をするか？
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker Image
+      run: |
+        cd my-python-app
+        docker build -t test-image .
